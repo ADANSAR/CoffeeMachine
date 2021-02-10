@@ -46,8 +46,7 @@ public class CoffeeMachineTest {
      */
     @Test
     public void TestChocolateWithNoSugarNoStick() {
-        RunCoffeeMachine(TestConstants.CHOCOLATE_WITH_NO_SUGAR_NO_STICK,
-                TestConstants.CHOCOLATE_WITH_NO_SUGAR_NO_STICK_RESULT);
+        RunCoffeeMachine(CHOCOLATE_WITH_NO_SUGAR_NO_STICK, CHOCOLATE_WITH_NO_SUGAR_NO_STICK_RESULT);
     }
 
     /**
@@ -55,8 +54,8 @@ public class CoffeeMachineTest {
      */
     @Test
     public void TestCoffeeWithTwoSugarsAndAStick() {
-        RunCoffeeMachine(TestConstants.COFFEE_WITH_TWO_SUGARS_AND_A_STICK,
-                TestConstants.COFFEE_WITH_TWO_SUGARS_AND_A_STICK_RESULT);
+        RunCoffeeMachine(COFFEE_WITH_TWO_SUGARS_AND_A_STICK,
+                COFFEE_WITH_TWO_SUGARS_AND_A_STICK_RESULT);
     }
 
     /**
@@ -64,8 +63,7 @@ public class CoffeeMachineTest {
      */
     @Test
     public void TestTeaWithOneSugarAndAStick() {
-        RunCoffeeMachine(TestConstants.TEA_WITH_ONE_SUGAR_AND_A_STICK,
-                TestConstants.TEA_WITH_ONE_SUGAR_AND_A_STICK_RESULT);
+        RunCoffeeMachine(TEA_WITH_ONE_SUGAR_AND_A_STICK, TEA_WITH_ONE_SUGAR_AND_A_STICK_RESULT);
     }
 
     /**
@@ -73,7 +71,7 @@ public class CoffeeMachineTest {
      */
     @Test
     public void TestMessageToForward() {
-        RunCoffeeMachine(TestConstants.MESSAGE_TO_FORWARD, TestConstants.MESSAGE_TO_FORWARD_RESULT);
+        RunCoffeeMachine(MESSAGE_TO_FORWARD, MESSAGE_TO_FORWARD_RESULT);
     }
 
 }
