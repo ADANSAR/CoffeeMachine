@@ -1,13 +1,17 @@
 package com.coffeemachine.utils;
 
+import javax.money.Monetary;
+
+import org.javamoney.moneta.Money;
+
 public enum DrinkType {
 
     /** coffee */
-    COFFEE("C", "coffee"),
+    COFFEE("C", "coffee", Money.of(0.60, "EUR")),
     /** chocolate */
-    CHOCOLATE("H", "chocolate"),
+    CHOCOLATE("H", "chocolate", Money.of(0.50, "EUR")),
     /** tea */
-    TEA("T", "tea");
+    TEA("T", "tea", Money.of(0.40, "EUR"));
 
     /** code of drink. */
     private final String abreviation;
@@ -15,14 +19,18 @@ public enum DrinkType {
     /** name of drink. */
     private final String name;
 
+    /** cost of drink. */
+    private final Money cost;
+
     /**
      *
      * @param abreviation
      *            code of drink
      */
-    DrinkType(String abreviation, String name) {
+    DrinkType(String abreviation, String name, Money cost) {
         this.abreviation = abreviation;
         this.name = name;
+        this.cost = cost;
     }
 
     /**
@@ -40,6 +48,13 @@ public enum DrinkType {
     }
 
     /**
+     * @return the cost
+     */
+    public Money getCost() {
+        return cost;
+    }
+
+    /**
      *
      * @param codeDrink
      *            code of drink
@@ -52,5 +67,15 @@ public enum DrinkType {
             }
         }
         return null;
+    }
+
+    /**
+     *
+     * @param inputMoney
+     *            the input money
+     * @return true if the money is enough to get the drink
+     */
+    public boolean isInputMoneyEnough(Money inputMoney) {
+        return cost.subtract(Monetary.getDefaultRounding().apply(inputMoney)).isPositiveOrZero();
     }
 }

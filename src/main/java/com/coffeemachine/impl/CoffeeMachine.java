@@ -20,7 +20,12 @@ public class CoffeeMachine implements IOrdererBehaviour {
         if (drink == null) {
             return StringUtils.EMPTY;
         }
-        return createDrinkOrder(drink) + " " + createDrinkOrderMessage(drink);
+        if (drink.isInputMoneyEnough(money)) {
+            return createDrinkOrder(drink) + " " + createDrinkOrderMessage(drink);
+        } else {
+            Money missingMoney = drink.computeMissingMoney(money);
+            return createDrinkOrderWithLessMoney(missingMoney);
+        }
     }
 
     private String createDrinkOrder(Drink drink) {
@@ -52,6 +57,16 @@ public class CoffeeMachine implements IOrdererBehaviour {
             sb.append(sugar);
             sb.append(" sugars and a stick");
         }
+        return sb.toString();
+    }
+
+    public String createDrinkOrderWithLessMoney(Money missingMoney) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("M:");
+        sb.append(missingMoney.getNumber());
+        sb.append(" ");
+        sb.append(missingMoney.getCurrency());
+        sb.append(" is missing to order the drink.");
         return sb.toString();
     }
 }

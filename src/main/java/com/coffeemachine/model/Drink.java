@@ -1,5 +1,7 @@
 package com.coffeemachine.model;
 
+import org.javamoney.moneta.Money;
+
 import com.coffeemachine.utils.DrinkType;
 
 public class Drink {
@@ -63,4 +65,32 @@ public class Drink {
     public void addSugar(int sugar) {
         this.sugar += sugar;
     }
+
+    /**
+     * @return the drinkType cost
+     */
+    public Money getCost() {
+        return drinkType.getCost();
+    }
+
+    /**
+     * @param inputMoney
+     *            the input money
+     *
+     * @return true if inputMoney are enough to get the drink, else false.
+     */
+    public boolean isInputMoneyEnough(Money inputMoney) {
+        return inputMoney.subtract(getCost()).isPositiveOrZero();
+    }
+
+    /**
+     * @param inputMoney
+     *            the input money
+     *
+     * @return the amount of missing money.
+     */
+    public Money computeMissingMoney(Money inputMoney) {
+        return getCost().subtract(inputMoney);
+    }
+
 }
