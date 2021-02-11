@@ -1,6 +1,8 @@
 package com.coffeemachine.impl;
 
-import com.coffeemachine.interfaces.DrinkMaker;
+import com.coffeemachine.interfaces.IOrdererBehaviour;
+import com.coffeemachine.model.Drink;
+import com.coffeemachine.utils.DrinkType;
 
 /**
  * Main
@@ -11,8 +13,8 @@ public final class Main {
      * @param args
      */
     public static void main(final String[] args) {
-        final DrinkMaker myDrinkMaker = new CoffeeMachine();
-        System.out.println(myDrinkMaker.runCoffeeMachine("T:1:0"));
+        final IOrdererBehaviour myCoffeeMachine = new CoffeeMachine();
+        System.out.println(myCoffeeMachine.createOrder(new Drink(DrinkType.CHOCOLATE, 2)));
     }
 
 }

@@ -1,9 +1,11 @@
 package com.coffeemachine.interfaces;
 
+import com.coffeemachine.model.Drink;
+
 /**
- * DrinkMaker
+ * IOrdererBehaviour
  */
-public interface DrinkMaker {
+public interface IOrdererBehaviour {
 
     /**
      * @param order
@@ -11,6 +13,6 @@ public interface DrinkMaker {
      *
      * @return the message of the order
      */
-    String runCoffeeMachine(final String order);
+    String createOrder(final Drink drink);
 
 }

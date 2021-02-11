@@ -48,4 +48,19 @@ public class Drink {
     public String getDrinkName() {
         return drinkType.getName();
     }
+
+    /**
+     * @return the drinkType abreviation
+     */
+    public String getDrinkType() {
+        return drinkType.getAbreviation();
+    }
+
+    /**
+     * @param sugar
+     *            the sugar to add
+     */
+    public void addSugar(int sugar) {
+        this.sugar += sugar;
+    }
 }
