@@ -1,6 +1,6 @@
 package com.coffeemachine.utils;
 
-public enum Drink {
+public enum DrinkType {
 
     /** coffee */
     COFFEE("C", "coffee"),
@@ -20,7 +20,7 @@ public enum Drink {
      * @param abreviation
      *            code of drink
      */
-    Drink(String abreviation, String name) {
+    DrinkType(String abreviation, String name) {
         this.abreviation = abreviation;
         this.name = name;
     }
@@ -45,8 +45,8 @@ public enum Drink {
      *            code of drink
      * @return enum drink corresponding to the codeDrink or null if not found
      */
-    public static Drink getDrinkFromCode(String codeDrink) {
-        for (Drink drink : Drink.values()) {
+    public static DrinkType getDrinkFromCode(String codeDrink) {
+        for (DrinkType drink : DrinkType.values()) {
             if (drink.getAbreviation().equalsIgnoreCase(codeDrink)) {
                 return drink;
             }

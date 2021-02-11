@@ -4,21 +4,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.coffeemachine.impl.CoffeeMachine;
+import com.coffeemachine.model.Drink;
+import com.coffeemachine.utils.DrinkType;
 
 /**
  * Tests for CoffeeMachine
  */
 public class CoffeeMachineTest {
 
-    static final String TEA_WITH_ONE_SUGAR_AND_A_STICK = "T:1:0";
-    static final String CHOCOLATE_WITH_NO_SUGAR_NO_STICK = "H::";
-    static final String COFFEE_WITH_TWO_SUGARS_AND_A_STICK = "C:2:0";
-    static final String MESSAGE_TO_FORWARD = "M:message-content";
-
-    static final String TEA_WITH_ONE_SUGAR_AND_A_STICK_RESULT = "Drink maker makes 1 tea with 1 sugar and a stick";
-    static final String CHOCOLATE_WITH_NO_SUGAR_NO_STICK_RESULT = "Drink maker makes 1 chocolate with no sugar - and therefore no stick";
-    static final String COFFEE_WITH_TWO_SUGARS_AND_A_STICK_RESULT = "Drink maker makes 1 coffee with 2 sugars and a stick";
-    static final String MESSAGE_TO_FORWARD_RESULT = "Drink maker forwards any message received onto the coffee machine interface for the customer to see";
+    static final String TEA_WITH_ONE_SUGAR_AND_A_STICK = "T:1:0 M:DrinkType maker makes 1 tea with 1 sugar and a stick";
+    static final String CHOCOLATE_WITH_NO_SUGAR_NO_STICK = "H:: M:DrinkType maker makes 1 chocolate with no sugar - and therefore no stick";
+    static final String COFFEE_WITH_TWO_SUGARS_AND_A_STICK = "C:2:0 M:DrinkType maker makes 1 coffee with 2 sugars and a stick";
 
     private CoffeeMachine cm;
 
@@ -31,13 +27,13 @@ public class CoffeeMachineTest {
     }
 
     /**
-     * @param input
-     *            input string
+     * @param inputDrink
+     *            input Drink
      * @param expectedResult
      *            the expected result
      */
-    private void RunCoffeeMachine(final String input, final String expectedResult) {
-        String realResult = cm.runCoffeeMachine(input);
+    private void CoffeeMachineTest(final Drink inputDrink, final String expectedResult) {
+        String realResult = cm.createOrder(inputDrink);
         assertEquals(expectedResult, realResult);
     }
 
@@ -46,7 +42,7 @@ public class CoffeeMachineTest {
      */
     @Test
     public void TestChocolateWithNoSugarNoStick() {
-        RunCoffeeMachine(CHOCOLATE_WITH_NO_SUGAR_NO_STICK, CHOCOLATE_WITH_NO_SUGAR_NO_STICK_RESULT);
+        CoffeeMachineTest(new Drink(DrinkType.CHOCOLATE, 0), CHOCOLATE_WITH_NO_SUGAR_NO_STICK);
     }
 
     /**
@@ -54,8 +50,7 @@ public class CoffeeMachineTest {
      */
     @Test
     public void TestCoffeeWithTwoSugarsAndAStick() {
-        RunCoffeeMachine(COFFEE_WITH_TWO_SUGARS_AND_A_STICK,
-                COFFEE_WITH_TWO_SUGARS_AND_A_STICK_RESULT);
+        CoffeeMachineTest(new Drink(DrinkType.COFFEE, 2), COFFEE_WITH_TWO_SUGARS_AND_A_STICK);
     }
 
     /**
@@ -63,15 +58,7 @@ public class CoffeeMachineTest {
      */
     @Test
     public void TestTeaWithOneSugarAndAStick() {
-        RunCoffeeMachine(TEA_WITH_ONE_SUGAR_AND_A_STICK, TEA_WITH_ONE_SUGAR_AND_A_STICK_RESULT);
-    }
-
-    /**
-     * Test of Message To Forward
-     */
-    @Test
-    public void TestMessageToForward() {
-        RunCoffeeMachine(MESSAGE_TO_FORWARD, MESSAGE_TO_FORWARD_RESULT);
+        CoffeeMachineTest(new Drink(DrinkType.TEA, 1), TEA_WITH_ONE_SUGAR_AND_A_STICK);
     }
 
 }

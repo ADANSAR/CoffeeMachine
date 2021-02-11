@@ -1,27 +1,17 @@
 package com.coffeemachine.impl;
 
-import com.coffeemachine.interfaces.DrinkMaker;
-import com.coffeemachine.model.Context;
-import com.coffeemachine.model.DrinkOrder;
-import com.coffeemachine.model.MessageOrder;
+import com.coffeemachine.model.Drink;
 
-public class CoffeeMachine implements DrinkMaker {
+public class CoffeeMachine {
 
     /**
      * default constuctor
      */
     public CoffeeMachine() {
-        super();
+        // Default constructor
     }
 
-    /**
-     * @param order
-     * @return result of the order
-     */
-    @Override
-    public String runCoffeeMachine(final String order) {
-        Context context = new Context(new DrinkOrder(order), new MessageOrder(order));
-        return context.proceed(order);
+    public String createOrder(Drink drink) {
+        return drink.getDrinkName();
     }
-
 }
