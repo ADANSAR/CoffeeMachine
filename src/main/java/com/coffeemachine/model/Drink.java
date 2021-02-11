@@ -8,10 +8,16 @@ public class Drink {
 
     private DrinkType drinkType;
     private int sugar;
+    private boolean isExtraHot = false;
 
     public Drink(DrinkType drink, int sugar) {
         drinkType = drink;
         this.sugar = sugar;
+    }
+
+    public Drink(DrinkType drink) {
+        drinkType = drink;
+        sugar = 0;
     }
 
     /**
@@ -91,6 +97,45 @@ public class Drink {
      */
     public Money computeMissingMoney(Money inputMoney) {
         return getCost().subtract(inputMoney);
+    }
+
+    /**
+     * @return the isExtraHot
+     */
+    public boolean isExtraHot() {
+        return isExtraHot;
+    }
+
+    /**
+     * @param isExtraHot
+     *            the isExtraHot to set
+     */
+    public void setExtraHot(boolean isExtraHot) {
+        if (drinkType != DrinkType.ORANGE_JUICE) {
+            this.isExtraHot = isExtraHot;
+        }
+    }
+
+    /**
+     * @return the drinkType abreviation with its temperature
+     */
+    public String getDrinkTypeWithTemperature() {
+        if (isExtraHot) {
+            return drinkType.getAbreviation() + "h";
+        } else {
+            return drinkType.getAbreviation();
+        }
+    }
+
+    /**
+     * @return the drinkType name with its temperature
+     */
+    public String getDrinkNameWithTemperature() {
+        if (isExtraHot) {
+            return "extra hot " + drinkType.getName();
+        } else {
+            return drinkType.getName();
+        }
     }
 
 }
