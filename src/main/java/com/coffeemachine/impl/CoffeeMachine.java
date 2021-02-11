@@ -44,7 +44,7 @@ public class CoffeeMachine implements IOrdererBehaviour {
 
     private String createDrinkOrderMessage(Drink drink) {
         StringBuilder sb = new StringBuilder();
-        sb.append("M:DrinkType maker makes 1 ");
+        sb.append("M:Drink maker makes 1 ");
         sb.append(drink.getDrinkName());
         sb.append(" with ");
         int sugar = drink.getSugar();

@@ -7,11 +7,13 @@ import org.javamoney.moneta.Money;
 public enum DrinkType {
 
     /** coffee */
-    COFFEE("C", "coffee", Money.of(0.60, "EUR")),
+    COFFEE("C", "coffee", Money.of(0.6, "EUR")),
     /** chocolate */
-    CHOCOLATE("H", "chocolate", Money.of(0.50, "EUR")),
+    CHOCOLATE("H", "chocolate", Money.of(0.5, "EUR")),
     /** tea */
-    TEA("T", "tea", Money.of(0.40, "EUR"));
+    TEA("T", "tea", Money.of(0.4, "EUR")),
+    /** orange juice */
+    ORANGE_JUICE("O", "orange juice", Money.of(0.6, "EUR"));
 
     /** code of drink. */
     private final String abreviation;
