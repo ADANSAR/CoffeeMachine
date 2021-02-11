@@ -1,5 +1,7 @@
 package com.coffeemachine.impl;
 
+import org.javamoney.moneta.Money;
+
 import com.coffeemachine.interfaces.IOrdererBehaviour;
 import com.coffeemachine.model.Drink;
 import com.coffeemachine.utils.DrinkType;
@@ -14,7 +16,8 @@ public final class Main {
      */
     public static void main(final String[] args) {
         final IOrdererBehaviour myCoffeeMachine = new CoffeeMachine();
-        System.out.println(myCoffeeMachine.createOrder(new Drink(DrinkType.CHOCOLATE, 2)));
+        System.out.println(
+                myCoffeeMachine.createOrder(new Drink(DrinkType.CHOCOLATE, 2), Money.of(2, "EUR")));
     }
 
 }

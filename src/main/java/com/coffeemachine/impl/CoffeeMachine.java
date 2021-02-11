@@ -1,6 +1,7 @@
 package com.coffeemachine.impl;
 
 import org.apache.commons.lang3.StringUtils;
+import org.javamoney.moneta.Money;
 
 import com.coffeemachine.interfaces.IOrdererBehaviour;
 import com.coffeemachine.model.Drink;
@@ -15,7 +16,7 @@ public class CoffeeMachine implements IOrdererBehaviour {
     }
 
     @Override
-    public String createOrder(Drink drink) {
+    public String createOrder(Drink drink, Money money) {
         if (drink == null) {
             return StringUtils.EMPTY;
         }

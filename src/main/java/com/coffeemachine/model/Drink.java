@@ -8,7 +8,7 @@ public class Drink {
     private int sugar;
 
     public Drink(DrinkType drink, int sugar) {
-        this.drinkType = drink;
+        drinkType = drink;
         this.sugar = sugar;
     }
 
@@ -24,7 +24,7 @@ public class Drink {
      *            the drinkType to set
      */
     public void setDrink(DrinkType drink) {
-        this.drinkType = drink;
+        drinkType = drink;
     }
 
     /**
