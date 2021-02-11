@@ -14,9 +14,9 @@ import com.coffeemachine.utils.DrinkType;
 public class CoffeeMachineTest {
 
     static final String TEA_WITH_ONE_SUGAR_AND_A_STICK_ENOUGH_MONEY = "T:1:0 M:DrinkType maker makes 1 tea with 1 sugar and a stick";
-    static final String TEA_WITH_ONE_SUGAR_AND_A_STICK_LESS_MONEY = "M:0.1 EUR is missing to order the drink.";
+    static final String TEA_WITH_ONE_SUGAR_AND_A_STICK_LESS_MONEY = "M:0.2 EUR is missing to order the drink.";
     static final String CHOCOLATE_WITH_NO_SUGAR_NO_STICK_ENOUGH_MONEY = "H:: M:DrinkType maker makes 1 chocolate with no sugar - and therefore no stick";
-    static final String CHOCOLATE_WITH_NO_SUGAR_NO_STICK_LESS_MONEY = "M:0.2 EUR is missing to order the drink.";
+    static final String CHOCOLATE_WITH_NO_SUGAR_NO_STICK_LESS_MONEY = "M:0.1 EUR is missing to order the drink.";
     static final String COFFEE_WITH_TWO_SUGARS_AND_A_STICK_ENOUGH_MONEY = "C:2:0 M:DrinkType maker makes 1 coffee with 2 sugars and a stick";
     static final String COFFEE_WITH_TWO_SUGARS_AND_A_STICK_LESS_MONEY = "M:0.2 EUR is missing to order the drink.";
 
