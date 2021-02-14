@@ -79,4 +79,8 @@ public class CoffeeMachine implements IOrdererBehaviour {
         sb.append(" is missing to order the drink.");
         return sb.toString();
     }
+
+    public void printStats() {
+        System.out.print("Hello World");
+    }
 }
