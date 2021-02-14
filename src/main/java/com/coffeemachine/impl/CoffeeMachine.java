@@ -6,13 +6,18 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.javamoney.moneta.Money;
 
+import com.coffeemachine.component.StatisticsComponent;
 import com.coffeemachine.interfaces.IOrdererBehaviour;
+import com.coffeemachine.interfaces.SoldItemsRepository;
 import com.coffeemachine.model.Drink;
+import com.coffeemachine.model.SoldItemsEntity;
 import com.coffeemachine.utils.DrinkType;
 
 public class CoffeeMachine implements IOrdererBehaviour {
 
     List<DrinkType> coldDrinks = Arrays.asList(DrinkType.ORANGE_JUICE);
+    SoldItemsRepository soldItemsRepo = new LocalSoldItemsRepository();
+    StatisticsComponent statsCompo = new StatisticsComponent();
 
     /**
      * default constuctor
@@ -27,6 +32,7 @@ public class CoffeeMachine implements IOrdererBehaviour {
             return StringUtils.EMPTY;
         }
         if (drink.isInputMoneyEnough(money)) {
+            soldItemsRepo.save(new SoldItemsEntity(drink.getDrinkType()));
             return createDrinkOrder(drink) + " " + createDrinkOrderMessage(drink);
         } else {
             Money missingMoney = drink.computeMissingMoney(money);
@@ -81,6 +87,6 @@ public class CoffeeMachine implements IOrdererBehaviour {
     }
 
     public void printStats() {
-        System.out.print("Hello World");
+        statsCompo.printStatistics(soldItemsRepo);
     }
 }
