@@ -1,6 +1,11 @@
 import static org.junit.Assert.assertEquals;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.javamoney.moneta.Money;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,8 +28,11 @@ public class CoffeeMachineTest {
     static final String EXTRA_HOT_CHOCOLATE_WITH_ONE_SUGAR_AND_A_STICK_ENOUGH_MONEY = "Hh:1:0 M:Drink maker makes 1 extra hot chocolate with 1 sugar and a stick";
     static final String EXTRA_HOT_COFFEE_WITH_NO_SUGAR_NO_STICK_ENOUGH_MONEY = "Ch:: M:Drink maker makes 1 extra hot coffee with no sugar - and therefore no stick";
     static final String ORANGE_JUICE_ENOUGH_MONEY = "O:: M:Drink maker makes 1 orange juice";
+    static final String STATS_2_CHOCOLATES_2_TEAS_1_COFFEE_1_ORANGE_JUICE_3_EUR = "The sold items are : 2 chocolates 2 teas 1 coffee 1 orange juice with a total of : 3.0EUR";
+    static final String STATS_3_CHOCOLATES_2_TEAS_2_COFFEES_3_AND_HALF_EUR = "The sold items are : 3 chocolates 2 teas 2 coffees with a total of : 3.5EUR";
 
     private CoffeeMachine cm;
+    private PrintStream out;
 
     /**
      * setUp for the test
@@ -32,6 +40,15 @@ public class CoffeeMachineTest {
     @Before
     public void setUp() {
         cm = new CoffeeMachine();
+        out = System.out;
+    }
+
+    /**
+     * Reset the system output at the end of the tests
+     */
+    @After
+    public void tearDown() {
+        System.setOut(out);
     }
 
     /**
@@ -142,4 +159,53 @@ public class CoffeeMachineTest {
         RunCoffeeMachineTest(drink, Money.of(0.6, "EUR"), ORANGE_JUICE_ENOUGH_MONEY);
     }
 
+    private void runCoffeeMachineStatsTest(final String expectedString) {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final BufferedOutputStream bos = new BufferedOutputStream(baos);
+        PrintStream ps = new PrintStream(bos);
+        System.setOut(ps);
+        cm.printStats();
+        System.out.flush();
+        String expectedResult = expectedString.replaceAll("\\n",
+                System.getProperty("line.separator"));
+        assertEquals(expectedResult, baos.toString());
+    }
+
+    /**
+     * Test of Stats of 2 chocolates 2 teas 1 Coffee and 1 orange juice with an amount of 3EUR
+     */
+    @Test
+    public void TestStats2Chocolates2Teas1CoffeeAnd1OrangeJuiceWithAnAmountOf3EUR() {
+        Drink drinkOfChoco = new Drink(DrinkType.CHOCOLATE);
+        Drink drinkOfTea = new Drink(DrinkType.TEA);
+        Drink drinkOfCoffee = new Drink(DrinkType.COFFEE);
+        Drink drinkOfOrangeJuice = new Drink(DrinkType.ORANGE_JUICE);
+        cm.createOrder(drinkOfChoco, Money.of(1, "EUR"));
+        cm.createOrder(drinkOfChoco, Money.of(1, "EUR"));
+        cm.createOrder(drinkOfTea, Money.of(1, "EUR"));
+        cm.createOrder(drinkOfTea, Money.of(1, "EUR"));
+        cm.createOrder(drinkOfCoffee, Money.of(1, "EUR"));
+        cm.createOrder(drinkOfOrangeJuice, Money.of(1, "EUR"));
+        cm.printStats();
+        runCoffeeMachineStatsTest(STATS_2_CHOCOLATES_2_TEAS_1_COFFEE_1_ORANGE_JUICE_3_EUR);
+    }
+
+    /**
+     * Test of Stats of 3 chocolates 2 teas 2 coffees with an amount of 3.5EUR
+     */
+    @Test
+    public void TestStats3Chocolates2Teas2CoffeesWithAnAmountOf3AndHalfEUR() {
+        Drink drinkOfChoco = new Drink(DrinkType.CHOCOLATE);
+        Drink drinkOfTea = new Drink(DrinkType.TEA);
+        Drink drinkOfCoffee = new Drink(DrinkType.COFFEE);
+        cm.createOrder(drinkOfChoco, Money.of(1, "EUR"));
+        cm.createOrder(drinkOfChoco, Money.of(1, "EUR"));
+        cm.createOrder(drinkOfChoco, Money.of(1, "EUR"));
+        cm.createOrder(drinkOfTea, Money.of(1, "EUR"));
+        cm.createOrder(drinkOfTea, Money.of(1, "EUR"));
+        cm.createOrder(drinkOfCoffee, Money.of(1, "EUR"));
+        cm.createOrder(drinkOfCoffee, Money.of(1, "EUR"));
+        cm.printStats();
+        runCoffeeMachineStatsTest(STATS_3_CHOCOLATES_2_TEAS_2_COFFEES_3_AND_HALF_EUR);
+    }
 }
