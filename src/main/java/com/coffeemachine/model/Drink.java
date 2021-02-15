@@ -10,11 +10,6 @@ public class Drink {
     private int sugar;
     private boolean isExtraHot = false;
 
-    public Drink(DrinkType drink, int sugar) {
-        drinkType = drink;
-        this.sugar = sugar;
-    }
-
     public Drink(DrinkType drink) {
         drinkType = drink;
         sugar = 0;
@@ -47,7 +42,21 @@ public class Drink {
      *            the sugar to set
      */
     public void setSugar(int sugar) {
-        this.sugar = sugar;
+        if (canBeExtraHotAndHaveSugar()) {
+            this.sugar = sugar;
+        }
+    }
+
+    /**
+     * @param sugar
+     *            the sugar to set
+     * @return the Drink
+     */
+    public Drink withSugar(int sugar) {
+        if (canBeExtraHotAndHaveSugar()) {
+            this.sugar = sugar;
+        }
+        return this;
     }
 
     /**
@@ -62,14 +71,6 @@ public class Drink {
      */
     public String getDrinkType() {
         return drinkType.getAbreviation();
-    }
-
-    /**
-     * @param sugar
-     *            the sugar to add
-     */
-    public void addSugar(int sugar) {
-        this.sugar += sugar;
     }
 
     /**
@@ -111,7 +112,7 @@ public class Drink {
      *            the isExtraHot to set
      */
     public void setExtraHot(boolean isExtraHot) {
-        if (drinkType != DrinkType.ORANGE_JUICE) {
+        if (canBeExtraHotAndHaveSugar()) {
             this.isExtraHot = isExtraHot;
         }
     }
@@ -136,6 +137,13 @@ public class Drink {
         } else {
             return drinkType.getName();
         }
+    }
+
+    /**
+     * @return true if the drink can be extra hot and can have sugar, else false
+     */
+    private boolean canBeExtraHotAndHaveSugar() {
+        return drinkType != DrinkType.ORANGE_JUICE;
     }
 
 }

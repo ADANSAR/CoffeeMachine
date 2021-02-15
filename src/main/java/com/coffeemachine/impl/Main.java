@@ -16,10 +16,12 @@ public final class Main {
     public static void main(final String[] args) {
         final CoffeeMachine myCoffeeMachine = new CoffeeMachine();
         myCoffeeMachine.createOrder(new Drink(DrinkType.TEA), Money.of(.9, "EUR"));
-        myCoffeeMachine.createOrder(new Drink(DrinkType.COFFEE, 1), Money.of(.8, "EUR"));
+        myCoffeeMachine.createOrder(new Drink(DrinkType.COFFEE).withSugar(1), Money.of(.8, "EUR"));
         myCoffeeMachine.createOrder(new Drink(DrinkType.ORANGE_JUICE), Money.of(.6, "EUR"));
-        myCoffeeMachine.createOrder(new Drink(DrinkType.CHOCOLATE, 2), Money.of(.8, "EUR"));
-        myCoffeeMachine.createOrder(new Drink(DrinkType.CHOCOLATE, 2), Money.of(.4, "EUR"));
+        myCoffeeMachine.createOrder(new Drink(DrinkType.CHOCOLATE).withSugar(2),
+                Money.of(.8, "EUR"));
+        myCoffeeMachine.createOrder(new Drink(DrinkType.CHOCOLATE).withSugar(2),
+                Money.of(.4, "EUR"));
         myCoffeeMachine.printStats();
     }
 

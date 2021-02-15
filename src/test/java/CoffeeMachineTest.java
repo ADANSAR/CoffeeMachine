@@ -68,7 +68,7 @@ public class CoffeeMachineTest {
      */
     @Test
     public void TestChocolateWithNoSugarNoStickWithEnoughMoney() {
-        RunCoffeeMachineTest(new Drink(DrinkType.CHOCOLATE, 0), Money.of(0.5, "EUR"),
+        RunCoffeeMachineTest(new Drink(DrinkType.CHOCOLATE), Money.of(0.5, "EUR"),
                 CHOCOLATE_WITH_NO_SUGAR_NO_STICK_ENOUGH_MONEY);
     }
 
@@ -77,7 +77,7 @@ public class CoffeeMachineTest {
      */
     @Test
     public void TestChocolateWithNoSugarNoStickWithLessMoney() {
-        RunCoffeeMachineTest(new Drink(DrinkType.CHOCOLATE, 0), Money.of(0.4, "EUR"),
+        RunCoffeeMachineTest(new Drink(DrinkType.CHOCOLATE), Money.of(0.4, "EUR"),
                 CHOCOLATE_WITH_NO_SUGAR_NO_STICK_LESS_MONEY);
     }
 
@@ -86,7 +86,7 @@ public class CoffeeMachineTest {
      */
     @Test
     public void TestCoffeeWithTwoSugarsAndAStickWithEnoughMoney() {
-        RunCoffeeMachineTest(new Drink(DrinkType.COFFEE, 2), Money.of(0.6, "EUR"),
+        RunCoffeeMachineTest(new Drink(DrinkType.COFFEE).withSugar(2), Money.of(0.6, "EUR"),
                 COFFEE_WITH_TWO_SUGARS_AND_A_STICK_ENOUGH_MONEY);
     }
 
@@ -95,7 +95,7 @@ public class CoffeeMachineTest {
      */
     @Test
     public void TestCoffeeWithTwoSugarsAndAStickWithLessMoney() {
-        RunCoffeeMachineTest(new Drink(DrinkType.COFFEE, 2), Money.of(0.4, "EUR"),
+        RunCoffeeMachineTest(new Drink(DrinkType.COFFEE).withSugar(2), Money.of(0.4, "EUR"),
                 COFFEE_WITH_TWO_SUGARS_AND_A_STICK_LESS_MONEY);
     }
 
@@ -104,7 +104,7 @@ public class CoffeeMachineTest {
      */
     @Test
     public void TestTeaWithOneSugarAndAStickWithEnoughMoney() {
-        RunCoffeeMachineTest(new Drink(DrinkType.TEA, 1), Money.of(0.4, "EUR"),
+        RunCoffeeMachineTest(new Drink(DrinkType.TEA).withSugar(1), Money.of(0.4, "EUR"),
                 TEA_WITH_ONE_SUGAR_AND_A_STICK_ENOUGH_MONEY);
     }
 
@@ -113,7 +113,7 @@ public class CoffeeMachineTest {
      */
     @Test
     public void TestTeaWithOneSugarAndAStickWithLessMoney() {
-        RunCoffeeMachineTest(new Drink(DrinkType.TEA, 1), Money.of(0.2, "EUR"),
+        RunCoffeeMachineTest(new Drink(DrinkType.TEA).withSugar(1), Money.of(0.2, "EUR"),
                 TEA_WITH_ONE_SUGAR_AND_A_STICK_LESS_MONEY);
     }
 
@@ -122,7 +122,7 @@ public class CoffeeMachineTest {
      */
     @Test
     public void TestExtraHotChocolateWithOneSugarAndAStickWithEnoughMoney() {
-        Drink drink = new Drink(DrinkType.CHOCOLATE, 1);
+        Drink drink = new Drink(DrinkType.CHOCOLATE).withSugar(1);
         drink.setExtraHot(true);
         RunCoffeeMachineTest(drink, Money.of(0.5, "EUR"),
                 EXTRA_HOT_CHOCOLATE_WITH_ONE_SUGAR_AND_A_STICK_ENOUGH_MONEY);
@@ -133,7 +133,7 @@ public class CoffeeMachineTest {
      */
     @Test
     public void TestExtraHotCoffeeWithnoSugarNoStickWithEnoughMoney() {
-        Drink drink = new Drink(DrinkType.COFFEE, 0);
+        Drink drink = new Drink(DrinkType.COFFEE);
         drink.setExtraHot(true);
         RunCoffeeMachineTest(drink, Money.of(0.6, "EUR"),
                 EXTRA_HOT_COFFEE_WITH_NO_SUGAR_NO_STICK_ENOUGH_MONEY);
@@ -144,7 +144,7 @@ public class CoffeeMachineTest {
      */
     @Test
     public void TestExtraHotTeaWithTwoSugarsAndAStickWithEnoughMoney() {
-        Drink drink = new Drink(DrinkType.TEA, 2);
+        Drink drink = new Drink(DrinkType.TEA).withSugar(2);
         drink.setExtraHot(true);
         RunCoffeeMachineTest(drink, Money.of(0.4, "EUR"),
                 EXTRA_HOT_TEA_WITH_TWO_SUGARS_AND_A_STICK_ENOUGH_MONEY);
