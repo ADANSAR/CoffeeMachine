@@ -7,12 +7,11 @@ import com.coffeemachine.utils.DrinkType;
 public class Drink {
 
     private DrinkType drinkType;
-    private int sugar;
+    private int sugar = 0;
     private boolean isExtraHot = false;
 
     public Drink(DrinkType drink) {
         drinkType = drink;
-        sugar = 0;
     }
 
     /**
@@ -42,7 +41,7 @@ public class Drink {
      *            the sugar to set
      */
     public void setSugar(int sugar) {
-        if (canBeExtraHotAndHaveSugar()) {
+        if (canBeServedWithSugar()) {
             this.sugar = sugar;
         }
     }
@@ -53,10 +52,17 @@ public class Drink {
      * @return the Drink
      */
     public Drink withSugar(int sugar) {
-        if (canBeExtraHotAndHaveSugar()) {
+        if (canBeServedWithSugar()) {
             this.sugar = sugar;
         }
         return this;
+    }
+
+    /**
+     * @return true if the drink can be served with sugar, else false.
+     */
+    public boolean canBeServedWithSugar() {
+        return drinkType.withSugar();
     }
 
     /**
@@ -78,6 +84,13 @@ public class Drink {
      */
     public Money getCost() {
         return drinkType.getCost();
+    }
+
+    /**
+     * @return true if the drink can be hot, else false.
+     */
+    public boolean canBeHot() {
+        return drinkType.canbeHot();
     }
 
     /**
@@ -112,7 +125,7 @@ public class Drink {
      *            the isExtraHot to set
      */
     public void setExtraHot(boolean isExtraHot) {
-        if (canBeExtraHotAndHaveSugar()) {
+        if (canBeHot()) {
             this.isExtraHot = isExtraHot;
         }
     }
@@ -137,13 +150,6 @@ public class Drink {
         } else {
             return drinkType.getName();
         }
-    }
-
-    /**
-     * @return true if the drink can be extra hot and can have sugar, else false
-     */
-    private boolean canBeExtraHotAndHaveSugar() {
-        return drinkType != DrinkType.ORANGE_JUICE;
     }
 
 }

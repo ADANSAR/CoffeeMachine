@@ -1,8 +1,5 @@
 package com.coffeemachine.impl;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.javamoney.moneta.Money;
 
@@ -11,11 +8,9 @@ import com.coffeemachine.interfaces.IOrdererBehaviour;
 import com.coffeemachine.interfaces.SoldItemsRepository;
 import com.coffeemachine.model.Drink;
 import com.coffeemachine.model.SoldItemsEntity;
-import com.coffeemachine.utils.DrinkType;
 
 public class CoffeeMachine implements IOrdererBehaviour {
 
-    List<DrinkType> coldDrinks = Arrays.asList(DrinkType.ORANGE_JUICE);
     SoldItemsRepository soldItemsRepo = new LocalSoldItemsRepository();
     StatisticsComponent statsCompo = new StatisticsComponent();
 
@@ -58,9 +53,8 @@ public class CoffeeMachine implements IOrdererBehaviour {
         StringBuilder sb = new StringBuilder();
         sb.append("M:Drink maker makes 1 ");
         sb.append(drink.getDrinkNameWithTemperature());
-        boolean isColdDrink = coldDrinks.stream().map(DrinkType::getAbreviation)
-                .anyMatch(a -> a.equals(drink.getDrinkType()));
-        if (!isColdDrink) {
+        boolean canBeSurvedWithSugar = drink.canBeServedWithSugar();
+        if (canBeSurvedWithSugar) {
             sb.append(" with ");
             int sugar = drink.getSugar();
             if (sugar == 0) {
